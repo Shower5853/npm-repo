@@ -2,7 +2,7 @@
 
 XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-$HOME/.config}"
 
-wget -O /tmp/wefetch_package_npm https://raw.githubusercontent.com/Shower5853/npm-repo/refs/heads/main/wefetch/wefetch >/dev/null 2>&1
+wget -q --show-progress -O /tmp/wefetch_package_npm https://raw.githubusercontent.com/Shower5853/npm-repo/refs/heads/main/wefetch/wefetch
 echo "Binary file downloaded!"
 
 sleep 1
@@ -13,13 +13,13 @@ echo "Binary file moved to /usr/bin/wefetch"
 sudo chmod +x /usr/bin/wefetch
 echo "chmod +x"
 
-wget -O /tmp/wefetch_logos.zip https://raw.githubusercontent.com/Shower5853/npm-repo/refs/heads/main/wefetch/logos.zip >/dev/null 2>&1
+wget -q --show-progress -O /tmp/logos.zip https://raw.githubusercontent.com/Shower5853/npm-repo/refs/heads/main/wefetch/logos.zip
 echo "Downloaded logos archive"
 
 mkdir -p "${XDG_CONFIG_HOME}/wefetch/"
 echo "Created ~/.config/wefetch/"
 
-mv /tmp/wefetch_logos.zip "${XDG_CONFIG_HOME}/wefetch/"
+mv /tmp/logos.zip "${XDG_CONFIG_HOME}/wefetch/logos.zip"
 echo "Logos archive moved to ~/.config/wefetch/"
 
 unzip "${XDG_CONFIG_HOME}/wefetch/logos.zip"
