@@ -11,4 +11,4 @@ echo "chmod +x"
 
 echo
 
-echo "NPM has been succesfully installed/updated!"
+echo "NPMan has been succesfully installed/updated!"
