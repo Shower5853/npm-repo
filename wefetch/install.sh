@@ -34,4 +34,4 @@ echo "Deleted logos archive"
 
 echo
 
-echo "Wefetch has been succesfully installed!"
+echo "Wefetch has been succesfully installed/updated!"
