@@ -1,7 +1,5 @@
 REPO_URL="https://raw.githubusercontent.com/Shower5853/npm-repo/refs/heads/main"
 
-INSTALLED_PACKAGES_FILE=/var/lib/npman/installed_packages.txt
-
 check_package_exists() {
 	local package="$1"
 	local url="${REPO_URL}/${package}/install.sh"
@@ -11,13 +9,6 @@ check_package_exists() {
 	else
 		return 1
 	fi
-}
-
-check_package_installed() {
-	local package="$1"
-
-	grep -q "^${package}$" "$INSTALLELD_PACKAGES_FILE"
-	return $?
 }
 
 if [ "$1" = "install" ]; then
@@ -35,34 +26,10 @@ if [ "$1" = "install" ]; then
 			/tmp/install_package_npman.sh
 			rm -rf /tmp/install_package_npman.sh
 
-			echo "$PACKAGE" >> "$INSTALLED_PACKAGES_FILE"
 		else
 			exit 0
 		fi
 	else
 		echo "Package ${PACKAGE} doesn't exist!"
-	fi
-elif [ "$1" = "remove" ]; then
-	local PACKAGE="$2"
-	if check_package_installed "$PACKAGE"; then
-		echo "Package ${PACKAGE} found in system!"
-
-		echo "Remove? [Y/n]"
-		read -n l -r
-		echo
-
-		if [[ $REPLY =~ ^[Yy]$ ]]; then
-			wget -q --show-progress -O /tmp/remove_package_npman ${REPO_URL}/${PACKAGE}/uninstall.sh
-			chmod +x /tmp/remove_package_npman
-			/tmp/remove_package_npman
-			rm -rf /tmp/remove_package_npman
-
-			grep -v "^${PACKAGE}$" "$INSTALLED_PACKAGES_FILE" > "${INSTALLED_PACKAGES_FILE}.tmp"
-			mv "${INSTALLED_PACKAGES_FILEL}.tmp" "$INSTALLED_PACKAGES_FILE"
-		else
-			exit 0
-		fi
-	else
-		exit 1
 	fi
 fi
